@@ -1,13 +1,13 @@
 package com.example.springdatajdbcexample.account;
 
-import java.util.EnumSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface AccountRepository extends CrudRepository<Account, Long> {
+import com.example.springdatajdbcexample.support.WithInsert;
+
+public interface AccountRepository extends CrudRepository<Account, Long>, AccountRepositoryCustom, WithInsert<Account> {
     @Override
     void deleteById(Long aLong);
 
@@ -20,9 +20,12 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
     @Override
     void deleteAll();
 
-    Optional<Account> findByIdAndStateIn(UUID uuid, Set<AccountState> states);
+    @Override
+    Iterable<Account> findAll();
 
-    default Optional<Account> findByIdExcludeDeleted(UUID uuid) {
-        return this.findByIdAndStateIn(uuid, EnumSet.of(AccountState.ACTIVE, AccountState.LOCKED));
+    Optional<Account> findByIdAndStateIn(Long id, Set<AccountState> states);
+
+    default Optional<Account> findByIdExcludeDeleted(Long id) {
+        return this.findByIdAndStateIn(id, AccountState.getNotDeleted());
     }
 }

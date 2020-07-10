@@ -1,7 +1,6 @@
 package com.example.springdatajdbcexample.account;
 
 import java.time.Instant;
-import java.util.UUID;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -10,6 +9,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Embedded;
 
 import com.example.springdatajdbcexample.support.EncryptString;
 import lombok.AccessLevel;
@@ -27,7 +27,7 @@ import lombok.With;
 @ToString
 public class Account {
     @Id @With
-    private final UUID id;
+    private final Long id;
 
     @NotBlank
     @Size(max = 50)
@@ -40,11 +40,14 @@ public class Account {
     @NotNull
     private AccountState state;
 
-    @Valid
-    private EncryptString email;
+    private String email;
 
     @NotNull
     @PastOrPresent
     @Builder.Default
     private Instant createdAt = Instant.now();
+
+    void delete() {
+        this.state = AccountState.DELETED;
+    }
 }
