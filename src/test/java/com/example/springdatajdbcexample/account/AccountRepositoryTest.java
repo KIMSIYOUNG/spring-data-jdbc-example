@@ -5,17 +5,17 @@ import static com.example.springdatajdbcexample.account.AccountTest.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@DataJdbcTest
+import com.example.springdatajdbcexample.support.EncryptString;
+
+@SpringBootTest
 class AccountRepositoryTest {
     private static final String TEST_EMAIL = "TEST@EMAIL.COM";
     @Autowired
@@ -29,10 +29,19 @@ class AccountRepositoryTest {
                 .loginId(String.valueOf(i))
                 .name(TEST_NAME)
                 .state(AccountState.ACTIVE)
-                .email(TEST_EMAIL)
+                .email(new EncryptString(TEST_EMAIL))
                 .build();
             accountRepository.save(account);
         }
+    }
+
+    @DisplayName("이메일이 정상적으로 encrypt, decrypt 되는지 확인합니다.")
+    @Test
+    void encrypt() {
+        Account account = accountRepository.findById(1L)
+            .orElseThrow(() -> new IllegalArgumentException("Dummy 데이터가 정상 Insert 되지 않았습니다."));
+
+        assertThat(account.getEmail().getValue()).isEqualTo(TEST_EMAIL);
     }
 
     @DisplayName("아이디를 기반으로 계정을 삭제합니다. 계정은 삭제되지 않고 상태만 변경됩니다.")

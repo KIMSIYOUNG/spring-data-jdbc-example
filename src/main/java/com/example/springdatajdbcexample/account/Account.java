@@ -9,7 +9,6 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Embedded;
 
 import com.example.springdatajdbcexample.support.EncryptString;
 import lombok.AccessLevel;
@@ -40,7 +39,8 @@ public class Account {
     @NotNull
     private AccountState state;
 
-    private String email;
+    @Valid
+    private EncryptString email;
 
     @NotNull
     @PastOrPresent

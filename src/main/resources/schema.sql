@@ -11,6 +11,6 @@ create table if not exists ACCOUNT
     LOGIN_ID   varchar(64)  not null,
     NAME       varchar(128) not null,
     STATE      varchar(16)  not null,
-    EMAIL      varchar(64),
+    EMAIL      binary,
     CREATED_AT datetime     not null
 )
