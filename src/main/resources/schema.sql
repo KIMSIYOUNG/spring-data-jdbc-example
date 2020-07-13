@@ -68,7 +68,7 @@ create table if not exists COMMENT
     CREATED_AT datetime not null
 );
 
-create table if not exists COMMENT_TYPE
+create table if not exists COMMENT_CONTENT
 (
     ID bigint primary key ,
     BODY varchar(255) not null ,

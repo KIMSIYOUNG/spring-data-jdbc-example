@@ -12,14 +12,21 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jdbc.core.JdbcAggregateOperations;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.example.springdatajdbcexample.support.EncryptString;
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class AccountRepositoryTest {
     private static final String TEST_EMAIL = "TEST@EMAIL.COM";
+
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    JdbcAggregateOperations jdbcAggregateOperations;
 
     @DisplayName("삭제 테스트를 위한 Dummy데이터를 추가하는 메서드입니다.")
     @BeforeEach
