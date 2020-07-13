@@ -50,4 +50,8 @@ public class Account {
     void delete() {
         this.state = AccountState.DELETED;
     }
+
+    public String getName() {
+        return name + "CUSTOM";
+    }
 }

@@ -2,6 +2,7 @@ package com.example.springdatajdbcexample.issue;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -69,4 +70,11 @@ public class Issue {
     @Builder.Default
     private Instant createdAt = Instant.now();
 
+    public void changeContent(IssueContent content) {
+        this.content = content;
+    }
+
+    public List<IssueAttachedLabel> getAttachedLabels() {
+        return Collections.unmodifiableList(this.attachedLabels);
+    }
 }

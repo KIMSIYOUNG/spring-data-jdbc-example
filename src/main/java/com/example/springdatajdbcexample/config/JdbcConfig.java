@@ -1,5 +1,6 @@
 package com.example.springdatajdbcexample.config;
 
+
 import java.sql.Clob;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -21,9 +22,11 @@ import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration
 import org.springframework.data.relational.core.mapping.event.BeforeSaveCallback;
 import org.springframework.lang.Nullable;
 
+import com.example.springdatajdbcexample.label.Label.LabelAfterSaveEventListener;
 import com.example.springdatajdbcexample.support.EncryptString;
 import com.example.springdatajdbcexample.support.Encryptor;
 import com.example.springdatajdbcexample.support.SimpleEncryptor;
+import repo.Repo.RepoBeforeSaveCallback;
 
 @Configuration
 public class JdbcConfig extends AbstractJdbcConfiguration {
@@ -48,6 +51,16 @@ public class JdbcConfig extends AbstractJdbcConfiguration {
                     }
                 }
             }));
+    }
+
+    @Bean
+    LabelAfterSaveEventListener labelAfterSaveEventListener() {
+        return new LabelAfterSaveEventListener();
+    }
+
+    @Bean
+    RepoBeforeSaveCallback repoBeforeSaveCallback() {
+        return new RepoBeforeSaveCallback();
     }
 
     @Bean
