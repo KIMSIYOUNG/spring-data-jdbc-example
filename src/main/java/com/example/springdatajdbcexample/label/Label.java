@@ -17,7 +17,7 @@ import org.springframework.data.relational.core.mapping.event.AfterSaveEvent;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import repo.Repo;
+import com.example.springdatajdbcexample.repo.Repo;
 
 @Getter
 @EqualsAndHashCode(of = "id")

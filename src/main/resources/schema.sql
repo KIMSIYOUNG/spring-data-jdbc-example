@@ -53,26 +53,26 @@ create table if not exists ISSUE_ATTACHED_LABEL
 
 create table if not exists LABEL
 (
-    ID      bigint auto_increment primary key not null,
-    REPO_ID bigint                            not null,
-    NAME    varchar(128)                      not null,
-    COLOR   varchar(128)                      not null
+    ID      varchar(128) not null primary key,
+    REPO_ID varchar(64)       not null,
+    NAME    varchar(128) not null,
+    COLOR   varchar(128) not null
 );
 
 create table if not exists COMMENT
 (
-    ID bigint auto_increment primary key not null,
-    VERSION bigint,
-    ISSUE_ID bigint not null ,
-    CREATED_BY bigint not null ,
-    CREATED_AT datetime not null
+    ID         bigint auto_increment primary key not null,
+    VERSION    bigint,
+    ISSUE_ID   bigint                            not null,
+    CREATED_BY bigint                            not null,
+    CREATED_AT datetime                          not null
 );
 
 create table if not exists COMMENT_CONTENT
 (
-    ID bigint primary key ,
-    BODY varchar(255) not null ,
-    MIME_TYPE varchar(32) not null
+    ID        bigint primary key,
+    BODY      varchar(255) not null,
+    MIME_TYPE varchar(32)  not null
 );
 
 

@@ -7,12 +7,15 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jdbc.core.JdbcAggregateOperations;
+import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import org.springframework.test.annotation.DirtiesContext;
 
 import com.example.springdatajdbcexample.support.EncryptString;
@@ -21,6 +24,7 @@ import com.example.springdatajdbcexample.support.EncryptString;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class AccountRepositoryTest {
     private static final String TEST_EMAIL = "TEST@EMAIL.COM";
+    private static final String TEST_NAME = "KYLE_CUSTOM";
 
     @Autowired
     AccountRepository accountRepository;
@@ -78,5 +82,20 @@ class AccountRepositoryTest {
 
         accountRepository.delete(account);
         assertThat(account.getState()).isEqualTo(AccountState.DELETED);
+    }
+
+    @DisplayName("auto increment가 걸려있는 상태에서, 아이디를 임의로 부여하여 데이터 베이스에 넣는 경우 터진다.")
+    @Test
+    void autoIncrementWithId() {
+        Account account = builder()
+            .id(10L)
+            .email(new EncryptString(TEST_EMAIL))
+            .name(TEST_NAME)
+            .loginId(TEST_EMAIL)
+            .state(AccountState.ACTIVE)
+            .build();
+        assertThatThrownBy(() -> {
+            accountRepository.save(account);
+        }).isInstanceOf(DbActionExecutionException.class);
     }
 }

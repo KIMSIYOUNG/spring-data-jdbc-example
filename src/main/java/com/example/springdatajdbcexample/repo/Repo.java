@@ -1,4 +1,4 @@
-package repo;
+package com.example.springdatajdbcexample.repo;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -17,7 +17,6 @@ import org.springframework.data.relational.core.conversion.MutableAggregateChang
 import org.springframework.data.relational.core.mapping.event.BeforeSaveCallback;
 
 import com.example.springdatajdbcexample.account.Account;
-import com.example.springdatajdbcexample.member.Member;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

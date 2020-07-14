@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.example.springdatajdbcexample.support.EncryptString;
 
 class AccountTest {
-    public static final String TEST_NAME = "KYLE";
+    private static final String TEST_NAME = "KYLE";
 
     @DisplayName("Lombok의 getter와 사용자 정의 getter가 동시에 존재하면 사용자 정의 getter 우선이고, 타 필드의 lombok getter는 정상작동한다.")
     @Test

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 import com.example.springdatajdbcexample.label.Label;
-import repo.Repo;
+import com.example.springdatajdbcexample.repo.Repo;
 
 public interface IssueRepositoryCustom {
     Page<Issue> findByRepoIdAndAttachedLabelsLabelId(

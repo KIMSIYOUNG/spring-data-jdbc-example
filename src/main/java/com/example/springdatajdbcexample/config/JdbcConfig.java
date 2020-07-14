@@ -23,10 +23,11 @@ import org.springframework.data.relational.core.mapping.event.BeforeSaveCallback
 import org.springframework.lang.Nullable;
 
 import com.example.springdatajdbcexample.label.Label.LabelAfterSaveEventListener;
+import com.example.springdatajdbcexample.repo.Repo;
 import com.example.springdatajdbcexample.support.EncryptString;
 import com.example.springdatajdbcexample.support.Encryptor;
 import com.example.springdatajdbcexample.support.SimpleEncryptor;
-import repo.Repo;
+
 
 @Configuration
 public class JdbcConfig extends AbstractJdbcConfiguration {

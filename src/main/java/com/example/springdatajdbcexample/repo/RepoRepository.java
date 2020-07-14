@@ -1,4 +1,4 @@
-package repo;
+package com.example.springdatajdbcexample.repo;
 
 import java.util.Optional;
 

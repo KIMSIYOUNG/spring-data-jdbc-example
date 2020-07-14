@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import com.example.springdatajdbcexample.label.Label;
-import repo.Repo;
+import com.example.springdatajdbcexample.repo.Repo;
 
 public class IssueRepositoryImpl implements IssueRepositoryCustom {
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
